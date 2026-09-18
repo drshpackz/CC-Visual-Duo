@@ -1,7 +1,7 @@
 # Build server — Scaleway
 
-Временная машина для сборки Visual Studio Duo (форк VS Code).
-Создана 2026-09-18. **Удалить, когда работа закончена** — тарифицируется почасово.
+**УДАЛЁН 2026-09-18** (прожил 39 минут, ≈0.6 €). Сборка теперь идёт на MacBook владельца — см. `CLAUDE.md`.
+Ниже — как он был устроен и что стоил, на случай повторной аренды.
 
 ## Инстанс
 
@@ -70,17 +70,4 @@ scw instance server terminate 9e9c7b14-e447-410c-9de0-850fd96666b7 zone=fr-par-1
 
 ## Воронка работы
 
-Локальный клон `/root/projects/CC-Visual-Duo` — единственное место правок и git-истории.
-Сервер — только вычисления. Всё через `scripts/remote.sh`:
-
-```bash
-scripts/remote.sh compile          # rsync изменений (~2 с) + полная компиляция (~35 с)
-scripts/remote.sh watch            # инкрементальная сборка
-scripts/remote.sh test <pattern>   # unit-тесты
-scripts/remote.sh package          # gulp vscode-linux-x64-min
-scripts/remote.sh run '<cmd>'      # любая команда в /root/vscode после sync
-scripts/remote.sh fetch <remote> [local]   # забрать артефакты
-scripts/remote.sh ssh | status | stop | start
-```
-
-rsync исключает `.git`, `node_modules`, `out`, `.build`, `.claude`. Коммит и push — отсюда.
+Сервера больше нет. Сборка — локально на Маке: `scripts/build.sh` (см. `CLAUDE.md`).
